@@ -1,0 +1,120 @@
+.card{
+    display: inline-block;
+    position: relative;
+    width: 250px;
+    height: 350px;
+}
+
+.recipe-title{
+    overflow-wrap: break-word;
+}
+
+.filtered{
+    display: none !important;
+}
+
+.card-container{
+    width: 1060px;
+}
+
+i.add{
+    display: inline;
+    position: relative;
+    top: -250px;
+    left: 215px;
+    color: white;
+    opacity: 0.8;
+}
+
+i.add:hover {
+    opacity: 1.0;
+}
+
+i.add:active{
+    color: rgb(80, 255, 138);
+}
+
+i.delete:hover {
+    color: white;
+}
+
+i.delete:active{
+    color: red;
+}
+
+.details{
+    position: relative;
+    top: -20px;
+}
+
+.delete{
+    color: grey;
+    position: relative;
+    cursor: pointer;
+    top: 0px;
+    left: 10px;
+}
+
+.list-group{
+    width: 360px;
+    display: inline-block;
+}
+
+.list{
+    position: relative;
+}
+
+ul.veg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+ul.shop {
+    position: absolute;
+    top: 0px;
+    left: 380px;
+}
+
+ul.spice {
+    position: absolute;
+    top: 0px;
+    left: 760px;
+}
+
+.veg li{
+    background-color: rgb(164, 255, 164);
+}
+
+.shop li{
+    background-color: rgb(166, 221, 255);
+}
+
+.spice li{
+    background-color: peachpuff;
+}
+
+h6{
+    text-align: center;
+}
+
+.snackbar{
+    width: 200px;
+    padding: 20px;
+    position: fixed;
+    left: 50%;
+    margin-left: -120px;
+    top: 0;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 1px 3px 5px rgba(0,0,0,0.2);
+    background: #ff6565;
+    text-align: center;
+    color: #fff;
+    margin-top: -100%;
+    transition: all 0.2s;
+}
+
+.snackbar.active{
+    margin-top: 0;
+}
+
