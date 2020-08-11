@@ -35,7 +35,7 @@ i.add:active{
 }
 
 i.delete:hover {
-    color: white;
+    color: red;
 }
 
 i.delete:active{
@@ -118,3 +118,31 @@ h6{
     margin-top: 0;
 }
 
+.recipe-list{
+    display: block;
+}
+
+.recipe-list ul{
+    list-style-type: none;
+    font-size: 1.3em;
+}
+
+.recipe-list ul li p{
+    display: inline;
+    font-weight: 500;
+}
+
+.recipe-list ul li i{
+    display: inline;
+    padding: 0 3px;
+    margin: 0 0 0 5px;
+}
+
+.recipe-list ul li i:hover{
+    color: red;
+}
+    
+
+.recipe-list ul li:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}

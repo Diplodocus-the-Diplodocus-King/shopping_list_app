@@ -11,6 +11,7 @@ const vegList = document.querySelector('.veg');
 const shopList = document.querySelector('.shop');
 const spiceList = document.querySelector('.spice');
 const listContainer = document.querySelector('.list');
+const chosenRecipeList = document.querySelector('.recipe-list');
 
 // filter recipes function
 const filterList = (term) => {
@@ -41,9 +42,8 @@ searchForm.addEventListener('submit', e => {
 // event listener on card container for added recipes
 cardContainer.addEventListener('click', e => {
     if(e.target.classList.contains('add')){
-       
         const addedRecipe = e.target.nextElementSibling.nextElementSibling.children[0].innerText.toLowerCase();
-        recipeList.getRecipes(data => recipeUI.getList(data, addedRecipe));
+        recipeList.getRecipes(data => recipeUI.getList(data, addedRecipe, chosenRecipeList));
         snackbar.show();
         searchForm.reset();
         let term = search.value.trim().toLowerCase();
@@ -56,6 +56,13 @@ listContainer.addEventListener('click', e => {
     
     if(e.target.classList.contains('delete')){
         recipeUI.removeItem(e.target.parentElement,e.target.parentElement.parentElement.getAttribute('id'));
+    }
+});
+
+// event listener for delete recipe list item and subsequent items from list
+chosenRecipeList.addEventListener('click', e => {
+    if(e.target.classList.contains('fa-times')){
+        recipeUI.removeRecipeItem(e.target.parentElement);
     }
 });
 

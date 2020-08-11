@@ -7,11 +7,13 @@ class Recipes {
     // collect recipes from database  
     getRecipes(callback){
         this.recipes.onSnapshot(snapshot => {
+            const data = new Array();
             snapshot.docChanges().forEach(change => {
                 if(change.type === 'added'){
-                   callback(change.doc.data());
+                    data.push(change.doc.data());
                 }
             });
+            callback(data);
         });
     }
 }
