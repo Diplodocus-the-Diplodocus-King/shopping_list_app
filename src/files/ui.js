@@ -28,190 +28,74 @@ class RecipeUI {
             `;
     
             this.cardContainer.innerHTML += html;
+
+            this.vegList.innerHTML = '<h6>Groceries</h6>';
+            this.shopList.innerHTML = '<h6>Supermarket</h6>';
+            this.spiceList.innerHTML = '<h6>Spices</h6>';
         });
     }
-
-    getList(data, addedRecipe, chosenRecipeList){
+    addList(shoppingList, addedRecipe, chosenRecipeList){
 
         // push recipe name to recipe chosen list
         chosenRecipeList.firstElementChild.innerHTML += `
-            <li class="${addedRecipe} badge badge-pill badge-light shadow-sm p-2 m-1"><p>${addedRecipe}</p><i class="fas fa-times"></i></li>
-            `;
+        <li class="badge badge-pill badge-light shadow-sm p-2 m-1" id="${addedRecipe}"><p>${addedRecipe}</p><i class="fas fa-times"></i></li>
+        `;
 
-        // get shopping list
-        data.forEach(recipe => {
-            if(recipe.title === addedRecipe){
+        this.showList(shoppingList, chosenRecipeList);
+    }
+    removeList(shoppingList, removedRecipeItem, chosenRecipeList){
 
-                // veg list sorting
-                if(this.vegArray.length == 0){
-                    this.vegArray = recipe.vegIngredients;
-                } else {
-                    recipe.vegIngredients.forEach(item => {
-    
-                        let added = 0;
-    
-                        this.vegArray.forEach((listItem, index) => {
-                            if (item.includes('(')){
-                                if(listItem.includes(item.slice(0, item.indexOf('(')).trim())){
-                                    const listItemName = listItem.slice(0, listItem.indexOf('('));
-                                    if(listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')).includes('g')){
-                                        const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.lastIndexOf('g')));
-                                        const newNum = Number(item.slice(item.indexOf('(')+1,item.lastIndexOf('g')));
-                                        const total = currentNum + newNum;
-                                        this.vegArray[index] = `${listItemName}(${total}g)`;
-                                        added ++;
-                                    } else {
-                                        const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')));
-                                        const newNum = Number(item.slice(item.indexOf('(')+1,item.indexOf(')')));   
-                                        const total = currentNum + newNum;
-                                        this.vegArray[index] = `${listItemName}(${total})`;
-                                        added ++;                
-                                    }                                                                         
-                                }
-                            }
-                        });
-                        if (!this.vegArray.includes(item) && !item.includes('(')) {
-                            this.vegArray.push(item);
-                        } else if(item.includes('(') && added === 0){
-                            this.vegArray.push(item);
-                        }                
-                    });
-                }
-                
-                // display veg list
-                this.vegList.innerHTML = '<h6>Groceries</h6>';
-                this.vegArray.forEach(item => {
+        // remove the recipe from the shopping list
+        removedRecipeItem.remove();
+
+        this.showList(shoppingList, chosenRecipeList);
+    }
+    showList(shoppingList, chosenRecipeList){
+
+        // clear existing list
+        this.vegList.innerHTML = '<h6>Groceries</h6>';
+        this.shopList.innerHTML = '<h6>Supermarket</h6>';
+        this.spiceList.innerHTML = '<h6>Spices</h6>';
+        // render list to browser
+        shoppingList.forEach((list, index) => {
+            list.forEach(item => {
+                if(index === 0){
                     if(item){
-                    const vegHTML = 
-                    `<li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>${item}</span>
-                        <i class="fas fa-trash-alt delete"></i>
-                    </li>
-                    `;
-    
-                    this.vegList.innerHTML += vegHTML;
+                        const html = 
+                        `<li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>${item}</span>
+                            <i class="fas fa-trash-alt delete"></i>
+                        </li>
+                        `;
+                        this.vegList.innerHTML += html;
                     }
-                });
-    
-                // shop list sorting
-                if(this.shopArray.length == 0){
-                    this.shopArray = recipe.shopIngredients;
-                } else {
-                    recipe.shopIngredients.forEach(item => {
-    
-                        let added = 0;
-    
-                        this.shopArray.forEach((listItem, index) => {
-                            if (item.includes('(')){
-                                if(listItem.includes(item.slice(0, item.indexOf('(')).trim())){
-                                    const listItemName = listItem.slice(0, listItem.indexOf('('));
-                                    if(listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')).includes('g')){
-                                        const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.lastIndexOf('g')));
-                                        const newNum = Number(item.slice(item.indexOf('(')+1,item.lastIndexOf('g')));
-                                        const total = currentNum + newNum;
-                                        this.shopArray[index] = `${listItemName}(${total}g)`;
-                                        added ++;
-                                    } else if (listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')).includes('ml')){
-                                        const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.lastIndexOf('m')));
-                                        const newNum = Number(item.slice(item.indexOf('(')+1,item.lastIndexOf('m')));
-                                        const total = currentNum + newNum;
-                                        this.shopArray[index] = `${listItemName}(${total}ml)`;
-                                        added ++;
-                                    } else {
-                                        const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')));
-                                        const newNum = Number(item.slice(item.indexOf('(')+1,item.indexOf(')')));   
-                                        const total = currentNum + newNum;
-                                        this.shopArray[index] = `${listItemName}(${total})`;
-                                        added ++;                
-                                    }                                                                         
-                                }
-                            }
-                        });
-                        if (!this.shopArray.includes(item) && !item.includes('(')) {
-                            this.shopArray.push(item);
-                        } else if(item.includes('(') && added === 0){
-                            this.shopArray.push(item);
-                        }                
-                    });
-                }
-    
-                // display shop list
-                this.shopList.innerHTML = '<h6>Supermarket</h6>';
-                this.shopArray.forEach(item => {
+                } else if(index === 1){
                     if(item){
-                    const shopHTML = 
-                    `<li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>${item}</span>
-                        <i class="fas fa-trash-alt delete"></i>
-                    </li>
-                    `;
-    
-                    this.shopList.innerHTML += shopHTML;
+                        const html = 
+                        `<li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>${item}</span>
+                            <i class="fas fa-trash-alt delete"></i>
+                        </li>
+                        `;
+                        this.shopList.innerHTML += html;
                     }
-                });
-    
-                // spice list sorting
-                if(this.spiceArray.length == 0){
-                    this.spiceArray = recipe.spiceIngredients;
-                } else {
-                    recipe.spiceIngredients.forEach(item => {
-    
-                        let added = 0;
-    
-                        this.spiceArray.forEach((listItem, index) => {
-                            if (item.includes('(')){
-                                if(listItem.includes(item.slice(0, item.indexOf('(')).trim())){
-                                    const listItemName = listItem.slice(0, listItem.indexOf('('));
-                                    const currentNum = Number(listItem.slice(listItem.indexOf('(')+1,listItem.indexOf(')')));
-                                    const newNum = Number(item.slice(item.indexOf('(')+1,item.indexOf(')')));   
-                                    const total = currentNum + newNum;
-                                    this.spiceArray[index] = `${listItemName}(${total})`;
-                                    added ++;                
-                                    }                                                                         
-                                }
-                        });
-                        if (!this.spiceArray.includes(item) && !item.includes('(')) {
-                            this.spiceArray.push(item);
-                        } else if(item.includes('(') && added === 0){
-                            this.spiceArray.push(item);
-                        }                
-                    });
-                }
-    
-                // display spice list
-                this.spiceList.innerHTML = '<h6>Spices</h6>';
-                this.spiceArray.forEach(item => {
+                } else if(index === 2){
                     if(item){
-                        
-                    const spiceHTML = 
-                    `<li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>${item}</span>
-                        <i class="fas fa-trash-alt delete"></i>
-                    </li>
-                    `;
-    
-                    this.spiceList.innerHTML += spiceHTML;
+                        const html = 
+                        `<li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>${item}</span>
+                            <i class="fas fa-trash-alt delete"></i>
+                        </li>
+                        `;
+                        this.spiceList.innerHTML += html;
                     }
-                });
-            }
+                }
+            });
         });
-
     }
-    removeItem(element, array){
-        
-        if(array === 'veg'){
-            this.vegArray = this.vegArray.filter(item => item !== element.textContent.trim());
-        } else if(array === 'shop'){
-            this.shopArray = this.shopArray.filter(item => item !== element.textContent.trim());
-        } else if(array === 'spice'){
-            this.spiceArray = this.spiceArray.filter(item => item !== element.textContent.trim());
-        }
+    removeItem(element){
+        // remove item element
         element.remove();
-    }
-    removeRecipeItem(item){
-        item.remove();
-
-        // TODO - remove all list items relevant to the recipe.
     }
 }
 
