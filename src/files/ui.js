@@ -15,7 +15,7 @@ class RecipeUI {
         data.forEach(recipe => {
             const html = 
             `<div class="card shadow-lg rounded my-1 mx-auto">
-                <img src="assets/img/${recipe.imgName}" class="time card-img-top" width="250" height="250">
+                <img src="./dist/assets/img/${recipe.imgName}" class="time card-img-top" width="250" height="250">
                 <i class="far fa-plus-square fa-2x add"></i>
                 <div class="icon bg-light mx-auto text-centre">
                     <img src="" alt="">

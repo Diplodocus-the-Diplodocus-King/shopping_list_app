@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Recipes</title>
+</head>
+<body>
+    <div class="container my-5 mx-auto">
+        <h1 class="text-muted text-center my-4">Recipes</h1>
+        <!-- search form -->
+        <form class="search-recipes my-4 text-center text-muted">
+            <label for="recipe">Search</label>   
+            <input type="text" name="recipe" class="form-control p-4" placeholder="Enter a recipe...">
+        </form>
+        <!-- card container -->
+        <div class="card-container container my-5 mx-auto">
+            <!-- cards will go here -->
+        </div>
+    </div>
+        <!-- line divide for shopping list -->
+        <div class="row">
+            <div class="col"><hr></div>
+            <div class="col-auto">SHOPPING LIST</div>
+            <div class="col"><hr></div>
+        </div>
+        <!-- chosen recipe list -->
+        <div class="recipe-list">
+            <ul>
+                <!-- chosen recipes will be embedded here -->
+            </ul>
+        </div>
+        <!-- shopping list -->
+        <div class="list container my-5 mx-auto">
+            <ul class="list-group mx-auto veg" id="veg">
+                <h6>Groceries</h6>
+                <!-- shopping items will be input here -->
+            </ul>
+            <ul class="list-group mx-auto shop" id="shop">
+                <h6>Supermarket</h6>
+                <!-- shopping items will be input here -->
+            </ul>
+            <ul class="list-group mx-auto spice" id="spice">
+                <h6>Spices</h6>
+                <!-- shopping items will be input here -->
+            </ul>
+        </div>
+    
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyC5cTZLZFXdKUvEJQqg8XGi2eMmwtWM0c0",
+        authDomain: "diplodocus-website.firebaseapp.com",
+        databaseURL: "https://diplodocus-website.firebaseio.com",
+        projectId: "diplodocus-website",
+        storageBucket: "diplodocus-website.appspot.com",
+        messagingSenderId: "765860083038",
+        appId: "1:765860083038:web:9be08ce7a9ec9100930bcf",
+        measurementId: "G-LTYPM95RDY"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.firestore();
+    </script>
+    <script src="./dist/assets/bundle.js"></script>
+</body>
+</html>
